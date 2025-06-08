@@ -1,0 +1,26 @@
+port 80;
+
+location /echo EchoHandler { # no arguments
+}
+
+location /static StaticHandler {
+  root /mnt/stateful_partition/storage; # supports relative paths
+}
+
+location /health HealthHandler {
+}
+
+location /default NotFoundHandler {
+}
+
+location /api CRUDHandler {
+  data_path /mnt/stateful_partition/storage/crud_data;
+}
+
+location /sleep SleepHandler{
+  sleep_seconds 1;
+}
+
+location /secure EchoHandler{
+  requires_auth true;
+}
